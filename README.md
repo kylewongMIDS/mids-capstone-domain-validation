@@ -1,1 +1,0 @@
-# mids-capstone-domain-validation
