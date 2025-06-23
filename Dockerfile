@@ -11,13 +11,15 @@ RUN apt-get update && apt-get install -y curl
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/root/.local/bin:$PATH"
 
+# Set Python path for imports
+ENV PYTHONPATH=/app
+
 # Copy Poetry files first (better Docker caching)
 COPY pyproject.toml poetry.lock* /app/
 
 # Install dependencies without creating virtualenvs (Docker prefers system install)
 RUN poetry config virtualenvs.create false \
     && poetry install --no-root --no-interaction --no-ansi
-
 
 # Copy the rest of your app
 COPY . /app

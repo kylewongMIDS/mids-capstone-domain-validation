@@ -29,3 +29,24 @@
     ```
     http://localhost:8501
     ```
+
+
+general notes:
+- batch prediction workflow:
+    - user submits csv to streamlit app
+        - done
+    - service account writes csv to s3 input folder with unique identifier name
+        - done
+    - s3 writing triggers lambda job
+        - need to start
+    - lambda job performs preprocessing to transform domains into model inputs
+        - in progress: preprocessing added in mode.preprocessing
+        need to formalize lambda job
+    - batch transformation job predicts on model inputs in bulk
+        - need to start
+    - lambda job writes model inputs as csv to s3 output folder with same unique identifier name
+        - need to start
+    - streamlit app polls for unique identifier name in output folder
+        - need to start
+    - when available, streamlit app enables user to download results via presigned url
+        - need to start

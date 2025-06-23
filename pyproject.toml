@@ -10,11 +10,17 @@ requires-python = ">=3.10"
 dependencies = [
     "streamlit (>=1.45.1,<2.0.0)",
     "boto3 (>=1.38.36,<2.0.0)",
-    "uuid (>=1.30,<2.0)"
+    "uuid (>=1.30,<2.0)",
+    "levenshtein (>=0.27.1,<0.28.0)",
+    "pandas (>=2.3.0,<3.0.0)",
+    "scikit-learn (>=1.7.0,<2.0.0)"
 ]
 
 [tool.poetry]
-packages = [{include = "dv_classifier_app", from = "src"}]
+packages = [
+    {include = "dv_classifier_app", from = "src"},
+    {include = "model", from = "src"}
+]
 
 
 [build-system]

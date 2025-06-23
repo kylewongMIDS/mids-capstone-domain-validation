@@ -1,6 +1,8 @@
 import csv
 import io
 
+
+
 def csv_to_list(uploaded_file):
     """Convert csv to list"""
     file_text = uploaded_file.read().decode("utf-8").splitlines()
