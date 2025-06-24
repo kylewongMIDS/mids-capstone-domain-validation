@@ -1,7 +1,7 @@
 [project]
 name = "dv-classifier-app"
 version = "0.1.0"
-description = ""
+description = "Streamlit frontend for domain validation"
 authors = [
     {name = "Kyle Wong",email = "kylewong@berkeley.edu"}
 ]
@@ -18,8 +18,8 @@ dependencies = [
 
 [tool.poetry]
 packages = [
-    {include = "dv_classifier_app", from = "src"},
-    {include = "model", from = "src"}
+    {include = "src", from = "."},
+    {include = "model", from = ".."}
 ]
 
 
