@@ -4,6 +4,7 @@ import pandas as pd
 # import Levenshtein
 import random
 import pickle
+from typing import List
 # import re
 
 
@@ -39,11 +40,11 @@ def count_hyphens(domain):
 
 
 # Apply
-def preprocess_domains(df: pd.DataFrame) -> pd.DataFrame:
+def preprocess_domains(clean_domain_list: List[str], not_before_list: List[str], not_after_list: List[str]) -> pd.DataFrame:
     """"
     Performs feature engineering and selection on submitted domains
     
-    Exected columns:
+    Exected input lists:
         - clean_domain (str): the domain
         - not_before (datetime): the start of the certificate's validitiy date
         - not_after (datetime): the end of the certificate's validitiy date
@@ -60,6 +61,13 @@ def preprocess_domains(df: pd.DataFrame) -> pd.DataFrame:
         - com (int)
 
     """
+    
+    df = pd.DataFrame({
+        'clean_domain': clean_domain_list,
+        'not_before': not_before_list,
+        'not_after': not_after_list
+    })
+    
     # declare input types
     df['not_after'] = pd.to_datetime(df['not_after'])
     df['not_before'] = pd.to_datetime(df['not_before'])
