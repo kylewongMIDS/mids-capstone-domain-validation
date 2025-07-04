@@ -8,9 +8,6 @@ from typing import List
 # import re
 
 
-
-
-
 # # Function: check if domain has small edit distance to any whitelist domain
 # def has_small_levenshtein(domain, threshold=2):
 #     for ref_domain in whitelist_domains:
