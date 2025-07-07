@@ -1,47 +1,60 @@
 import csv
 import io
+import json
 
-# def inspect_csv(uploaded_file):
+
+def csv_to_lists(uploaded_file, ca_name) -> list:
+    """
+    Converts a CSV file to a list of JSON-like dictionaries in the expected API format.
+
+    Expects columns:
+    - san_identities (comma-separated domain strings)
+    - not_before (ISO 8601 datetime)
+    - not_after (ISO 8601 datetime)
+    """
+   
+    decoded = uploaded_file.read().decode("utf-8-sig")
+    reader = csv.DictReader(io.StringIO(decoded))
+        
+    result = []
+    for row in reader:
+        
+        identities = [domain.strip() for domain in row["san_identities"].split(",")]
+        san_str = json.dumps(identities)
+        escaped_str = san_str.replace('"', r'\"')
+
+        entry = {
+            "san_identities": escaped_str,
+            "not_before": row["not_before"],
+            "not_after": row["not_after"],
+            "ca_name": ca_name
+        }
+        result.append(entry)
+
+    return result
+
+
+
+
+def pred_to_csv(response: dict) -> io.BytesIO:
     
-#     clean_domain, not_before, not_after = [str], [str], [str]
-#     file_text = uploaded_file.read().decode("utf-8").splitlines()[1:]
-#     for row in file_text:
-#         vals = row.split(',')
-#         clean_domain.append(vals[0])
-#         not_before.append(vals[1])
-#         not_after.append(vals[2])
-#     return clean_domain, not_before, not_after
-
-def csv_to_lists(uploaded_file):
-    """Convert csv to list"""
-    # file_text = uploaded_file.read().decode("utf-8").splitlines()
-    # reader = csv.DictReader(file_text)
-
-    # # Extract domain column
-    # # clean_domain = [row["clean_domain"] for row in reader if "clean_domain" in row and row["clean_domain"].strip() != ""]
-    # # not_before = [row["not_before"] for row in reader if "not_before" in row and row["not_before"].strip() != ""]
-    # # not_after = [row["not_after"] for row in reader if "not_after" in row and row["not_after"].strip() != ""]
     
-    # clean_domain = [row["clean_domain"] for row in reader]
-    # not_before = [row["not_before"] for row in reader]
-    # not_after = [row["not_after"] for row in reader]
-    
-    # return clean_domain, not_before, not_after
-    
-    clean_domain, not_before, not_after = [], [], []
-    file_text = uploaded_file.read().decode("utf-8").splitlines()[1:]
-    for row in file_text:
-        vals = row.split(',')
-        clean_domain.append(vals[0])
-        not_before.append(vals[1])
-        not_after.append(vals[2])
-    return clean_domain, not_before, not_after
-
-
-def dict_to_csv(data):
-    """Convert list of dictionaries to CSV in memory"""
+    # create text stream
     output = io.StringIO()
-    writer = csv.DictWriter(output, fieldnames=data[0].keys())
+    # create csv writer from dictionary input, writes to text stream with column names given
+    writer = csv.DictWriter(output, fieldnames=['parsed_domainname', 'prediction'])
+    # write the given fieldnames as headers
     writer.writeheader()
-    writer.writerows(data)
-    return output.getvalue()
+    # write each row using given fieldnames within features key
+    writer.writerows(response['features'])
+    
+
+    # used chatgpt for help on this part
+    # streamlit expects binary
+    buffer = io.BytesIO()
+    buffer.write(output.getvalue().encode("utf-8"))
+    buffer.seek(0)
+    return buffer
+
+
+
