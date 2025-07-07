@@ -1,11 +1,7 @@
 import pandas as pd
-# from scipy.stats import entropy
-# from collections import Counter
-# import Levenshtein
 import random
 import pickle
 from typing import List
-# import re
 
 
 # # Function: check if domain has small edit distance to any whitelist domain
