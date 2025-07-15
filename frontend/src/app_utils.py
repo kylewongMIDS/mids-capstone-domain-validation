@@ -21,10 +21,10 @@ def csv_to_lists(uploaded_file, ca_name) -> list:
         
         identities = [domain.strip() for domain in row["san_identities"].split(",")]
         san_str = json.dumps(identities)
-        escaped_str = san_str.replace('"', r'\"')
+        # escaped_str = san_str.replace('"', r'\"')
 
         entry = {
-            "san_identities": escaped_str,
+            "san_identities": san_str,
             "not_before": row["not_before"],
             "not_after": row["not_after"],
             "ca_name": ca_name

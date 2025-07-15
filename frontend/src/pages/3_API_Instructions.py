@@ -4,7 +4,7 @@ import json
 st.title("Step 3: 🐟 Phish Fence API Setup")
 st.markdown("Use this API to submit certificate requests and receive predictions on potential malicious domains.")
 st.markdown("Please contact [clifton.harris@berkeley.edu](clifton.harris@berkeley.edu) to setup your organization's API url.")
-
+st.markdown('---')
 selected_ca = st.session_state.get('selected_ca', 'Unknown CA')
 # --- Endpoint ---
 st.subheader("📍 Endpoint")
