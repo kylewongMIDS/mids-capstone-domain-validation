@@ -5,5 +5,5 @@ st.title("🐟 Phish Fence")
 st.write('Welcome to Phish Fence, ')
 
 if st.button("Let's get started"):
-    st.switch_page(r"pages\1_CA_Selection.py")
+    st.switch_page("pages/1_CA_Selection.py")
     

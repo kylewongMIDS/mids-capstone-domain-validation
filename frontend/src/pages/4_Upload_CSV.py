@@ -8,7 +8,7 @@ selected_ca = st.session_state.get('selected_ca', 'Unknown CA')
 
 
 # API Gateway info
-url = "https://5edsvi6tk3.execute-api.us-east-1.amazonaws.com/default/freature_extractor_new"
+url = st.secrets["api"]["gateway_url"]
 headers = {"Content-Type": "application/json"}
 
 
