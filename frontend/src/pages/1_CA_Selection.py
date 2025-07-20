@@ -1,6 +1,8 @@
 import streamlit as st
 
-st.title("Step 1: Select a Certificate Authority")
+st.set_page_config(page_title="CA Selection", layout="wide")
+st.title("🐟 Phishfence")
+st.subheader("Step 1: Select a Certificate Authority")
 
 cas = [
     "Actalis", "Add Trust", "Certum", "Comodo", "DigiCert", "Entrust",
@@ -12,3 +14,8 @@ selected_ca = st.selectbox("Choose a CA to begin:", cas)
 if st.button("Next"):
     st.session_state.selected_ca = selected_ca
     st.switch_page("pages/2_Choose_Input_Method.py")
+
+
+# Footer
+st.markdown("---")
+st.caption("© 2025 MIDS Capstone — UC Berkeley")

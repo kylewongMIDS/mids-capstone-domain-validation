@@ -1,7 +1,9 @@
 import streamlit as st
 import json
 
-st.title("Step 3: 🐟 Phish Fence API Setup")
+st.set_page_config(page_title="API Instructions", layout="wide")
+st.title("🐟 Phishfence")
+st.subheader("Step 3: API Instructions")
 st.markdown("Use this API to submit certificate requests and receive predictions on potential malicious domains.")
 st.markdown("Please contact [clifton.harris@berkeley.edu](clifton.harris@berkeley.edu) to setup your organization's API url.")
 st.markdown('---')
@@ -71,3 +73,8 @@ st.markdown("""
 - All timestamps should be in ISO 8601 format with timezone (`Z`).
 - The response contains a flat list of domains and their maliciousness score (0 to 1).
 """)
+
+
+# Footer
+st.markdown("---")
+st.caption("© 2025 MIDS Capstone — UC Berkeley")

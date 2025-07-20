@@ -11,14 +11,22 @@ selected_ca = st.session_state.get('selected_ca', 'Unknown CA')
 url = st.secrets["api"]["gateway_url"]
 headers = {"Content-Type": "application/json"}
 
-
-st.title("Step 3: Manual Upload")
+st.set_page_config(page_title="Upload CSV", layout="wide")
+st.title("🐟 Phishfence")
+st.subheader("Step 3: Upload CSV")
 st.markdown("Predict malicious domains before provisioning certificates")
-st.markdown("---")
-st.markdown("### 📁 Upload a CSV of domains")
+
+with st.expander('Click to view the expected CSV format'):
+    st.markdown("""
+                | san_identities | not_before | not_after |
+                | --- | --- | --- |
+                | secure-login-paypal.net, secure-login-venmo.net | 2024-06-01T00:00:00Z | 2024-09-01T00:00:00Z |
+                | go0gle.com, facebo0k.com | 2024-06-03T00:00:00Z | 2024-07-03T00:00:00Z |
+                | google.com, facebook.com | 2024-06-04T00:00:00Z | 2024-08-04T00:00:00Z |
+                """)
 
 
-file_upload = st.file_uploader('Required columns: [san_identities, not_before, not_after]', type='csv')
+file_upload = st.file_uploader(' ', type='csv')
 
 if file_upload:
     with st.spinner("Processing file..."):
@@ -51,8 +59,8 @@ if file_upload:
             st.write(response.text)
             st.write(f'Exception message: {e}')
 
-else:
-    st.info("📄 Please upload a CSV file to begin.")
+# else:
+    # st.info("📄 Please upload a CSV file to begin.")
 
 # Footer
 st.markdown("---")
