@@ -1,5 +1,5 @@
 import streamlit as st
-from app_utils import pred_to_csv, pred_to_df, df_to_download_buffer
+from app_utils import pred_to_df, df_to_download_buffer
 import plotly.express as px
 
 
