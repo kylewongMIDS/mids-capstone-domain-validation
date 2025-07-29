@@ -1,0 +1,7 @@
+streamlit
+requests
+json
+csv
+io
+plotly
+pandas
