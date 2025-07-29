@@ -2,12 +2,22 @@ import streamlit as st
 import json
 
 st.set_page_config(page_title="API Instructions", layout="wide")
-st.title("🐟 Phishfence")
+st.markdown("""
+    <style>
+    .gold-text {
+        font-size: 48px;
+        font-weight: bold;
+        color: #d4af37;
+    }
+    </style>
+
+    <div class="gold-text">PhishFence</div>
+""", unsafe_allow_html=True)
 st.subheader("Step 3: API Instructions")
 st.markdown("Use this API to submit certificate requests and receive predictions on potential malicious domains.")
 st.markdown("Please contact [clifton.harris@berkeley.edu](clifton.harris@berkeley.edu) to setup your organization's API url.")
 st.markdown('---')
-selected_ca = st.session_state.get('selected_ca', 'Unknown CA')
+selected_ca = st.session_state.get('selected_ca', 'Not Selected')
 # --- Endpoint ---
 st.subheader("📍 Endpoint")
 st.code("https://your-api-url.amazonaws.com/default/FeatureExtractorContainer", language="bash")
@@ -18,16 +28,18 @@ st.markdown("Each object in the array represents one certificate request. `san_i
 
 example_payload = [
     {
-        "san_identities": json.dumps(["secure-login-paypal.net", "secure-login-venmo.net"]),
+        "san_identities": json.dumps(["googlevads-cn.com", ".ficoanalyticcloud.com", ".dms.apset2.ficoanalyticcloud.com"]),
         "not_before": "2024-06-01T00:00:00Z",
         "not_after": "2024-09-01T00:00:00Z",
-        "ca_name": selected_ca
+        "ca_name": selected_ca,
+        "domain_created": json.dumps(["2021-04-19 21:44:18.000", "null", "2023-04-13 09:25:58.000"])
     },
     {
         "san_identities": json.dumps(["go0gle.com", "facebo0k.com"]),
         "not_before": "2024-06-01T00:00:00Z",
         "not_after": "2024-09-01T00:00:00Z",
-        "ca_name": selected_ca
+        "ca_name": selected_ca,
+        "domain_created": json.dumps(["2025-02-13 12:31:38.000","2025-05-23 11:55:32.000"])
     }
 ]
 
@@ -75,6 +87,6 @@ st.markdown("""
 """)
 
 
-# Footer
-st.markdown("---")
-st.caption("© 2025 MIDS Capstone — UC Berkeley")
+# # Footer
+# st.markdown("---")
+# st.caption("© 2025 MIDS Capstone — UC Berkeley")

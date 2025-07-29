@@ -1,6 +1,7 @@
 [theme]
-primaryColor = "#7F5AF0"         # Purple-blue accent (Anthropic-style)
-backgroundColor = "#FFFFFF"      # Clean white background
-secondaryBackgroundColor = "#F5F5F5"  # Light gray panel background
-textColor = "#1F1F1F"            # Dark gray text
-font = "sans serif"              # Clean, readable font
+base="dark"
+primaryColor="#d4af37"        # metallic gold
+backgroundColor="#1a1a1a"     # very dark gray
+secondaryBackgroundColor="#2c2c2c"  # subtle contrast for cards/containers
+textColor="#ffffff"           # white text for contrast
+font="sans serif"             # modern, clean
